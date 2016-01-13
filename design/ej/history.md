@@ -29,6 +29,8 @@ Now the state of the project is completely described by a single number correspo
 
 The history directories will become somewhat cluttered, but it's trivial to write a function to purge them periodically.
 
+By default, of course, if there is no version file, then we always just return the files in the directory. Anyone writing by hand can just work normally without worrying about versioning.
+
 The one thing we don't get here is transactions. However, I think that's pretty straightforward just using a multi-segment counter and a procedure to mark the beginning and end of the transaction that allows us to tell if it failed in the middle (e.g., if we reboot in the middle). It's also possible to maintain additional counters for stack and card levels, if we want.
 
 Incidentally, because of the way we expect to implement changes to the system (via dispatched actions), it's trivial to do a "journaling" filesystem in which we write the command(s) we're about to do, then write when we've done it (them). This would allow us to even complete a transaction if we crashed in the middle.
