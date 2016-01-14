@@ -23,10 +23,10 @@ export class ImageListViewer extends oak.ListViewer {
   };
 
   // Select the data for the listviewer.
-  // Called during `componentDidMount` and `onPropsChanged`
+  // Called during `componentDidMount` and `onPropsChanged`.
   // `props` has been munged with `presets` as necessary.
-  getData({ props, state, card, template, stack, project }) {
-    const fetcher = state.list || new Meteor.Images.ListFetcher({ delegate: this });
+  getData({ props, state }) {
+    const fetcher = (this.state && this.state.list) || new Meteor.Images.ListFetcher({ delegate: this });
     fetcher.set({
       selector: props.selector,
       sort: props.sort,
